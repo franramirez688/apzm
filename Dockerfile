@@ -11,3 +11,5 @@ RUN pip install -r /requirements/dev.txt
 
 # Working directory
 WORKDIR /app
+
+ENV PYTHONPATH /app/apzm
