@@ -110,3 +110,7 @@ class WalletAccountTestCase(TestCase):
             trade=self.trade
         )
         self.assertRaises(WalletError, t_wallet.make_a_client_charge, uuid.uuid4(), 100)
+
+
+class OperationsWalletAccountTestCase(TestCase):
+    pass

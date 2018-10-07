@@ -13,9 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import include, url
 from django.contrib import admin
-from django.urls import path
+from rest_framework.documentation import include_docs_urls
+
+API_TITLE = 'WALLET API'
+API_DESCRIPTION = 'A Simple Web API for simulating a Wallet Web App'
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^', include('wallet.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION))
 ]
