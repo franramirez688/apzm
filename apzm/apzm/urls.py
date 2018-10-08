@@ -16,13 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.documentation import include_docs_urls
+from django.conf import settings
 
-API_TITLE = 'WALLET API'
+
+API_VERSION = settings.API_CURRENT_VERSION
+API_TITLE = 'WALLET API VERSION %s' % API_VERSION
 API_DESCRIPTION = 'A Simple Web API for simulating a Wallet Web App'
 
 
 urlpatterns = [
-    url(r'^', include('wallet.urls')),
+    url(r'^api/%s/' % API_VERSION, include(settings.API_CURRENT_VERSION_URLS_PATH)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION))

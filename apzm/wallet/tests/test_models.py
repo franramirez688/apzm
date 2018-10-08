@@ -1,31 +1,18 @@
 import uuid
 
-from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.test import TestCase
 
 from wallet.exceptions import WalletError
-from wallet.models import Trade, Client, ClientWalletAccount, \
+from wallet.models import Client, ClientWalletAccount, \
     TradeWalletAccount
+from wallet.tests.factory import create_wallet_clients
 
 
 class WalletAccountTestCase(TestCase):
+
     def setUp(self):
-        user1 = User.objects.create(
-            username="sega"
-        )
-        user2 = User.objects.create(
-            username="pedro"
-        )
-        self.trade = Trade.objects.create(
-            company="Sega Saturn",
-            cif="A5641565465",
-            user=user1
-        )
-        self.client = Client.objects.create(
-            nif="74895621X",
-            user=user2
-        )
+        self.client, self.trade = create_wallet_clients()
 
     def test_automatic_token_creation_client_wallet_account(self):
         c_wallet = ClientWalletAccount.objects.create(
