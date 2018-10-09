@@ -39,7 +39,6 @@ class HistoryOperations(models.Model):
     summary = models.TextField(null=True, blank=True)
 
     created = models.DateTimeField('Creation date', auto_now_add=True)
-    modified = models.DateTimeField('Last modification date', auto_now=True)
 
 
 class WalletAccountBase(models.Model):
@@ -74,7 +73,7 @@ class ClientWalletAccount(WalletAccountBase):
 
     Note: A Client User can have several Wallet Accounts
     """
-    client = models.ForeignKey(Client, related_name="client_wallet",
+    client = models.ForeignKey(Client, related_name="client_wallets",
                                db_index=True, on_delete=models.CASCADE)
 
     # FIXME: Perhaps this operation would be defined only by a TradeWalletAccount
@@ -104,7 +103,7 @@ class TradeWalletAccount(WalletAccountBase):
 
     Note: A Trade User can have only one Wallet Account
     """
-    trade = models.OneToOneField(Trade, related_name="trade_wallet", db_index=True,
+    trade = models.OneToOneField(Trade, related_name="trade_wallets", db_index=True,
                                  on_delete=models.CASCADE)
 
     def make_a_client_charge(self, client_wallet_token, money):

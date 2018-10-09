@@ -21,19 +21,6 @@ class ClientApiTestCase(APITestCase):
     def test_can_logout(self):
         pass
 
-
-class TradeApiTestCase(APITestCase):
-    client = APIClient()
-
-    def test_can_login(self):
-        pass
-
-    def test_can_logout(self):
-        pass
-
-
-class ClientWalletAccountApiTestCase(_BaseViewTest):
-
     def test_create_wallet_accounts(self):
         """Client user can create several wallet accounts"""
         pass
@@ -63,7 +50,14 @@ class ClientWalletAccountApiTestCase(_BaseViewTest):
         pass
 
 
-class TradeWalletAccountApiTestCase(_BaseViewTest):
+class TradeApiTestCase(APITestCase):
+    client = APIClient()
+
+    def test_can_login(self):
+        pass
+
+    def test_can_logout(self):
+        pass
 
     def test_create_wallet_account(self):
         """Trade user can create wallet account"""
